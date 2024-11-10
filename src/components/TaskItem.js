@@ -17,6 +17,18 @@ const TaskItem = ({ task, fetchTasks }) => {
         
     };
 
+    const handleUpdate = async (updateTask) => {
+        try {
+            await axios.put(`http://localhost:5000/api/tasks/${task._id}`, updateTask);
+            // fetchTasks();
+            setTitle(updateTask.title);
+            setDescription(updateTask.description);
+            handleEdit(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div>
                 <h3>{title}</h3>
