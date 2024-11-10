@@ -11,6 +11,7 @@ const TaskItem = ({ task, fetchTasks }) => {
     const handleDelete = async () => {
         try {
             await axios.delete(`http://localhost:5000/api/remove/${task._id}`);
+            fetchTasks();
         } catch (error) {
             console.log(error);
         }
@@ -29,18 +30,40 @@ const TaskItem = ({ task, fetchTasks }) => {
         }
     }
 
+    const updateCompeted = async(value) => {
+        try {
+            await axios.put(`http://localhost:5000/api/completed/${task._id}`, {completed: value});
+            // fetchTasks();
+            setCompleted(value);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleEdit = (value) => {
+        setEdit(value);
+    }
+
     return (
-        <div>
+        <div className='row'>
+            <div className='col-md-4'>
                 <h3>{title}</h3>
+            </div>
+            <div className='col-md-2'>
                 <span>{description}</span>
                 
+            </div>
+            <div className='col-md-2'>
                 <p>{completed ? 'Completed' : 'Pending'}</p>
+            </div>
+            <div className='col-md-4'>
                 <div class="btn-group btn-group-sm">
                     <button onClick={() => { setEdit(!edit)}} btn btn-primary>Edit</button>
                     {completed ? <button onClick={() => updateCompeted(false)}>Mark as Pending</button>
                     : <button onClick={() => updateCompeted(true)}>Mark as Completed</button>}
                     <button onClick={handleDelete}>Delete</button>
                 </div>
+            </div>
             
             <TaskEdit edit={edit} handleEdit={handleEdit} handleUpdate={handleUpdate} task={task} />
         </div>
