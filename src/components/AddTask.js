@@ -7,6 +7,7 @@ const AddTask = ({ fetchTasks }) => {
     const [ completed, setCompleted ] = useState(false);
 
     const handleInit = () => {
+        
         setTitle('');
         setDescription('');
         setCompleted(false);
@@ -14,7 +15,7 @@ const AddTask = ({ fetchTasks }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         await axios.post('http://localhost:5000/api/tasks', { title, description, completed });
         fetchTasks();
         handleInit();
