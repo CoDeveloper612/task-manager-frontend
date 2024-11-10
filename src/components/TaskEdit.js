@@ -28,22 +28,8 @@ const TaskEdit = (props) => {
   }
 
   const closeModal = () => {
-    props.handleEdit(false);
+    setEdit(false)
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.handleUpdate({title, description});
-  }
-
-  useEffect(() => {
-    setIsOpen(props.edit)
-  }, [props.edit])
-
-  useEffect(() => {
-    setTitle(props.task.title);
-    setDescription(props.task.description);
-  }, [props.task])
 
   return (
     <div>
