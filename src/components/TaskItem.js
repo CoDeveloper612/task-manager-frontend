@@ -8,6 +8,15 @@ const TaskItem = ({ task, fetchTasks }) => {
     const [description, setDescription] = useState(task.description);
     const [completed, setCompleted] = useState(task.completed);
 
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:5000/api/remove/${task._id}`);
+        } catch (error) {
+            console.log(error);
+        }
+        
+    };
+
     return (
         <div>
                 <h3>{title}</h3>
