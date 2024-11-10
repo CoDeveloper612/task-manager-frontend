@@ -31,6 +31,11 @@ const TaskEdit = (props) => {
     setEdit(false)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.handleUpdate({title, description});
+  }
+
   return (
     <div>
       <Modal
